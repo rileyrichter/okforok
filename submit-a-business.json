@@ -1,0 +1,545 @@
+{
+    "name": "Empty integration",
+    "flow": [
+        {
+            "id": 20,
+            "module": "webflow:watchSites",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 341468
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -12,
+                    "y": 137,
+                    "messages": [
+                        {
+                            "category": "setup",
+                            "severity": "error",
+                            "message": "Field 'Webhook' is not filled."
+                        }
+                    ]
+                },
+                "restore": {
+                    "__IMTHOOK__": {
+                        "label": "Covid Test"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "site",
+                        "type": "text",
+                        "label": "Site ID"
+                    },
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                    },
+                    {
+                        "name": "d",
+                        "time": true,
+                        "type": "date",
+                        "label": "Date"
+                    },
+                    {
+                        "name": "_id",
+                        "type": "text",
+                        "label": "Webhook ID"
+                    },
+                    {
+                        "name": "data",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Data"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "util:SetVariable",
+            "version": 1,
+            "parameters": {},
+            "filter": {
+                "name": "Only get valid submissions",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{20.name}}",
+                            "o": "text:equal",
+                            "b": "Email Form"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "name": "delivery",
+                "scope": "execution",
+                "value": "{{switch(20.data.Delivery; \"true\"; \"\"\"5e7d24d2bf142803eed236fb\"\", \"; \"\")}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 264,
+                    "y": -198,
+                    "name": "Set Delivery ID"
+                },
+                "restore": {
+                    "scope": {
+                        "label": "One execution"
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "label": "Variable name",
+                        "type": "text",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "label": "Variable lifetime",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "label": "Variable value",
+                        "type": "any"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "label": "delivery",
+                        "type": "any"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "module": "util:SetVariable",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "takeout",
+                "scope": "execution",
+                "value": "{{switch(20.data.Takeout; \"true\"; \"\"\"5e7d24c672b2bb2a2a6e31e4\"\", \"; \"\")}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 536,
+                    "y": 146,
+                    "name": "Set Takeout ID"
+                },
+                "restore": {
+                    "scope": {
+                        "label": "One execution"
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "label": "Variable name",
+                        "type": "text",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "label": "Variable lifetime",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "label": "Variable value",
+                        "type": "any"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "label": "takeout",
+                        "type": "any"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "module": "util:SetVariable",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "curbside",
+                "scope": "execution",
+                "value": "{{switch(20.data.Curbside; \"true\"; \"\"\"5e7d24da5bec101b85506b2d\"\", \"; \"\")}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 736,
+                    "y": -275,
+                    "name": "Set Curbside ID"
+                },
+                "restore": {
+                    "scope": {
+                        "label": "One execution"
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "label": "Variable name",
+                        "type": "text",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "label": "Variable lifetime",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "label": "Variable value",
+                        "type": "any"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "label": "curbside",
+                        "type": "any"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "module": "util:ComposeTransformer",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "value": "{{9.value}}{{8.value}}{{3.value}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 973,
+                    "y": 122,
+                    "name": "Concatenate ID's"
+                },
+                "expect": [
+                    {
+                        "name": "value",
+                        "label": "Text",
+                        "type": "text",
+                        "multiline": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 15,
+            "module": "util:ComposeTransformer",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "value": "{{substring(12.value; 0; length(12.value) - 2)}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1177,
+                    "y": -280,
+                    "name": "Remove Last Comma"
+                },
+                "expect": [
+                    {
+                        "name": "value",
+                        "label": "Text",
+                        "type": "text",
+                        "multiline": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 17,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": false
+            },
+            "mapper": {
+                "url": "https://api.webflow.com/collections/5e7960444843d2391d68ffaf/items",
+                "method": "post",
+                "headers": [
+                    {
+                        "name": "Authorization",
+                        "value": "Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                    },
+                    {
+                        "name": "accept-version",
+                        "value": "1.0.0"
+                    }
+                ],
+                "qs": [],
+                "bodyType": "raw",
+                "parseResponse": false,
+                "authUser": "",
+                "authPass": "",
+                "timeout": "",
+                "shareCookies": false,
+                "ca": "",
+                "rejectUnauthorized": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "gzip": true,
+                "contentType": "application/json",
+                "data": "{      \n    \"fields\": {   \n    \"_archived\": false,\n    \"_draft\": true,     \n    \"name\": \"{{20.data.Name}}\",\n    \"website\": \"{{20.data.`Business Website`}}\",\n    \"location-2\": \"{{20.data.Location}}\",\n    \"category\": \"{{20.data.Category}}\",\n    \"hours\": \"{{20.data.Hours}}\",\n    \"gift-cards-available\": {{20.data.`GC - Available`}},\n    \"gift-card-online\":{{20.data.`GC - Online`}},\n    \"gift-card-in-person\":{{20.data.`GC - In Person`}}, \n    \"gift-card-link\": \"{{20.data.`Gift Card Website`}}\",\n    \"phone-number\": \"{{20.data.`Phone Number`}}\",\n    \"online-order-link\": \"{{20.data.`Order Website`}}\",\n    \"delivery-apps\":{{20.data.deliveryapps}},\n    \"grubhub\":{{20.data.GrubHub}},\n    \"postmates\":{{20.data.Postmates}},\n    \"door-dash\":{{20.data.`Door Dash`}},\n    \"uber-eats\":{{20.data.`Uber Eats`}},\n    \"seamless\":{{20.data.Seamless}},\n    \"special-instructions\": \"{{20.data.`special-instructions`}}\",\n    \"order-options\": [{{15.value}}]      \n    }    \n}\n\n\n"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1515,
+                    "y": 155,
+                    "name": "Create New Item in Webflow (draft)"
+                },
+                "restore": {
+                    "method": {
+                        "mode": "chose",
+                        "label": "POST"
+                    },
+                    "headers": {
+                        "mode": "chose",
+                        "items": [
+                            "undefined",
+                            "undefined"
+                        ]
+                    },
+                    "qs": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "bodyType": {
+                        "label": "Raw"
+                    },
+                    "contentType": {
+                        "label": "JSON (application/json)"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "type": "boolean",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "label": "URL",
+                        "type": "url",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "label": "Method",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "label": "Headers",
+                        "type": "array",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Name",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text"
+                            }
+                        ],
+                        "labels": {
+                            "add": "Add a header",
+                            "edit": "Edit a header"
+                        }
+                    },
+                    {
+                        "name": "qs",
+                        "label": "Query String",
+                        "type": "array",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Name",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text"
+                            }
+                        ],
+                        "labels": {
+                            "add": "Add parameter",
+                            "edit": "Edit parameter"
+                        }
+                    },
+                    {
+                        "name": "bodyType",
+                        "label": "Body type",
+                        "type": "select",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "label": "Parse response",
+                        "type": "boolean",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "label": "User name",
+                        "type": "text"
+                    },
+                    {
+                        "name": "authPass",
+                        "label": "Password",
+                        "type": "password"
+                    },
+                    {
+                        "name": "timeout",
+                        "label": "Timeout",
+                        "type": "uinteger",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "label": "Share cookies with other HTTP modules",
+                        "type": "boolean",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "label": "Self-signed certificate",
+                        "type": "cert",
+                        "multiline": true
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "type": "boolean",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "label": "Follow redirect",
+                        "type": "boolean",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "type": "boolean",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "label": "Request compressed content",
+                        "type": "boolean",
+                        "required": true
+                    },
+                    {
+                        "name": "contentType",
+                        "label": "Content type",
+                        "type": "select",
+                        "validate": {
+                            "enum": [
+                                "text/plain",
+                                "application/json",
+                                "application/xml",
+                                "text/xml",
+                                "text/html",
+                                "custom"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "data",
+                        "label": "Request content",
+                        "type": "buffer"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": false,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.integromat.com"
+    }
+}

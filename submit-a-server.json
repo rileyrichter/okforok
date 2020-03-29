@@ -1,0 +1,332 @@
+{
+    "name": "OK for OK - Tip Submission Form",
+    "flow": [
+        {
+            "id": 1,
+            "module": "webflow:watchSites",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 345150
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "__IMTHOOK__": {
+                        "label": "OK for OK V3"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "site",
+                        "type": "text",
+                        "label": "Site ID"
+                    },
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                    },
+                    {
+                        "name": "d",
+                        "time": true,
+                        "type": "date",
+                        "label": "Date"
+                    },
+                    {
+                        "name": "_id",
+                        "type": "text",
+                        "label": "Webhook ID"
+                    },
+                    {
+                        "name": "data",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Data"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "webflow:createItem",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1095526
+            },
+            "filter": {
+                "name": "Tip Form Only",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{1.name}}",
+                            "b": "Tip Form",
+                            "o": "text:equal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "live": false,
+                "fields": {
+                    "name": "{{1.data.Name}}",
+                    "_draft": true,
+                    "_archived": false,
+                    "where-do-you-work": "{{1.data.Workplace}}",
+                    "what-s-your-cashtag": "{{1.data.Cashtag}}",
+                    "what-s-your-venmo-username": "{{1.data.Venmo}}",
+                    "what-s-your-instagram-username": "{{1.data.Instagram}}"
+                },
+                "site_id": "5e7eb9ab94ac4718f8c973ee",
+                "collection_id": "5e7fdf4c5836db062eba4632"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "live": {
+                        "mode": "chose"
+                    },
+                    "fields": {
+                        "nested": {
+                            "_draft": {
+                                "mode": "chose"
+                            },
+                            "_archived": {
+                                "mode": "chose"
+                            }
+                        }
+                    },
+                    "site_id": {
+                        "mode": "chose",
+                        "label": "Oklahomans for Oklahoma - Final"
+                    },
+                    "__IMTCONN__": {
+                        "label": "OK for OK V3 Connection (Integromat)"
+                    },
+                    "collection_id": {
+                        "mode": "chose",
+                        "label": "Servers"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "site_id",
+                        "type": "select",
+                        "label": "Site ID",
+                        "required": true
+                    },
+                    {
+                        "name": "live",
+                        "type": "boolean",
+                        "label": "Live"
+                    },
+                    {
+                        "name": "collection_id",
+                        "type": "select",
+                        "label": "Collection ID",
+                        "required": true
+                    },
+                    {
+                        "name": "fields",
+                        "spec": [
+                            {
+                                "name": "where-do-you-work",
+                                "type": "text",
+                                "label": "Where do you work?"
+                            },
+                            {
+                                "name": "what-s-your-venmo-username",
+                                "type": "text",
+                                "label": "What's your Venmo username?"
+                            },
+                            {
+                                "name": "what-s-your-cashtag",
+                                "type": "text",
+                                "label": "What's your Cashtag?"
+                            },
+                            {
+                                "name": "what-s-your-instagram-username",
+                                "type": "text",
+                                "label": "What's your Instagram username?"
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true,
+                                "validate": {
+                                    "max": 256
+                                }
+                            },
+                            {
+                                "name": "slug",
+                                "type": "text",
+                                "label": "Slug",
+                                "validate": {
+                                    "max": 256
+                                }
+                            },
+                            {
+                                "name": "_archived",
+                                "type": "boolean",
+                                "label": "Archived",
+                                "required": true
+                            },
+                            {
+                                "name": "_draft",
+                                "type": "boolean",
+                                "label": "Draft",
+                                "required": true
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Fields"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "updated-by",
+                        "type": "text",
+                        "label": "Updated By"
+                    },
+                    {
+                        "name": "created-by",
+                        "type": "text",
+                        "label": "Created By"
+                    },
+                    {
+                        "name": "published-by",
+                        "type": "text",
+                        "label": "Published By"
+                    },
+                    {
+                        "name": "_cid",
+                        "type": "text",
+                        "label": "Collection ID"
+                    },
+                    {
+                        "name": "_id",
+                        "type": "text",
+                        "label": "Item ID"
+                    },
+                    {
+                        "name": "where-do-you-work",
+                        "type": "text",
+                        "label": "Where do you work?",
+                        "required": false
+                    },
+                    {
+                        "name": "what-s-your-venmo-username",
+                        "type": "text",
+                        "label": "What's your Venmo username?",
+                        "required": false
+                    },
+                    {
+                        "name": "what-s-your-cashtag",
+                        "type": "text",
+                        "label": "What's your Cashtag?",
+                        "required": false
+                    },
+                    {
+                        "name": "what-s-your-instagram-username",
+                        "type": "text",
+                        "label": "What's your Instagram username?",
+                        "required": false
+                    },
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name",
+                        "required": true,
+                        "validate": {
+                            "max": 256
+                        }
+                    },
+                    {
+                        "help": "Must be alphanumerical and not contain any spaces or special characters",
+                        "name": "slug",
+                        "type": "text",
+                        "label": "Slug",
+                        "required": false,
+                        "validate": {
+                            "max": 256
+                        }
+                    },
+                    {
+                        "name": "_archived",
+                        "type": "boolean",
+                        "label": "Archived",
+                        "default": false,
+                        "required": true
+                    },
+                    {
+                        "name": "_draft",
+                        "type": "boolean",
+                        "label": "Draft",
+                        "default": false,
+                        "required": true
+                    },
+                    {
+                        "name": "created-on",
+                        "time": false,
+                        "type": "date",
+                        "label": "Created On",
+                        "required": false
+                    },
+                    {
+                        "name": "updated-on",
+                        "time": false,
+                        "type": "date",
+                        "label": "Updated On",
+                        "required": false
+                    },
+                    {
+                        "name": "published-on",
+                        "time": false,
+                        "type": "date",
+                        "label": "Published On",
+                        "required": false
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": false,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.integromat.com"
+    }
+}
