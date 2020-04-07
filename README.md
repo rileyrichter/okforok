@@ -5,8 +5,10 @@ In this repository you will find two files to help you if you're running a clone
 
 In order to make the process easier, we have two files available. 
 
-1. [submit-a-business.json](https://github.com/rileyrichter/okforok/blob/master/submit-a-business.json)
-2. [submit-a-server.json](https://github.com/rileyrichter/okforok/blob/master/submit-a-server.json)
+__*EDIT* : we have changed the links here to the raw files to make this easier to download__
+
+1. [submit-a-business.json](https://raw.githubusercontent.com/rileyrichter/okforok/master/submit-a-business.json)
+2. [submit-a-server.json](https://raw.githubusercontent.com/rileyrichter/okforok/master/submit-a-server.json)
 
 These are JSON files that you can download and import straight into your own blank Integromat Scenario. See [this GIF](https://share.getcloudapp.com/xQug5gPm) to see how to import.
      
